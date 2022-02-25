@@ -11,12 +11,10 @@ export class JogadoresService {
 
     constructor(@InjectModel('Jogador') private readonly jogadorModel: Model<Jogador>) {}
     
-    private readonly logger = new Logger(JogadoresService.name);
+    // private readonly logger = new Logger(JogadoresService.name);
 
     async criarJogador(criarJogadorDto: CriarJogadorDto): Promise<Jogador>{
         const { email } = criarJogadorDto;
-
-        // const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
 
         const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
 
@@ -40,7 +38,7 @@ export class JogadoresService {
     }
 
     async consultarTodosJogadores(): Promise<Jogador[]>{
-        // return await this.jogadores;
+        
         return await this.jogadorModel.find().exec();
     }
 
